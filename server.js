@@ -7,25 +7,23 @@ require('./hbs/helpers');
 const port = process.env.PORT || 3000;
 
 
-app.use(express.static(__dirname + '/public'));
 
 // Express HBS engine
 hbs.registerPartials(__dirname + '/views/parciales');
 app.set('view engine', 'hbs');
 
+app.use(express.static(__dirname + '/public'));
 
-
-
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
 
     res.render('home', {
         nombre: 'ezequiel'
     });
-});
+});*/
 
-app.get('/about', (req, res) => {
+app.get('*', (req, res) => {
 
-    res.render('about');
+    res.sendFile(__dirname + '/public/index.html');
 });
 
 app.listen(port, () => {
